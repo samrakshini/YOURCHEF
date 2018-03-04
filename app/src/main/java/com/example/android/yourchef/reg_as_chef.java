@@ -27,12 +27,12 @@ public class reg_as_chef extends AppCompatActivity {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
-                        FragmentManager fragmentManager=getSupportFragmentManager();
+                        /*FragmentManager fragmentManager=getSupportFragmentManager();
                         FragmentTransaction
                                 fragmentTransaction=fragmentManager.beginTransaction();
                         Dashboard f1=new Dashboard();
                         fragmentTransaction.add(R.id.dashboard,f1);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.commit();*/
 
                         mDrawerLayout.closeDrawers();
 
