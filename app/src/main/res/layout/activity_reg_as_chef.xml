@@ -7,6 +7,12 @@
     tools:context="com.example.android.yourchef.reg_as_chef"
     android:background="@color/SnowWhite"
     android:id="@+id/chdrawer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container">
+    </RelativeLayout>
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
         android:layout_height="match_parent"
@@ -20,9 +26,5 @@
         >
 
     </android.support.design.widget.NavigationView>
-    <fragment android:name="com.example.android.yourchef.Dashboard"
-        android:id="@+id/dashboard"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+
 </android.support.v4.widget.DrawerLayout>

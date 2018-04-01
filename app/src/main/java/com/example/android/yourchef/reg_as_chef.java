@@ -13,11 +13,10 @@ public class reg_as_chef extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_as_chef);
 
-        mDrawerLayout = findViewById(R.id.chdrawer);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -27,15 +26,10 @@ public class reg_as_chef extends AppCompatActivity {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
-                        /*FragmentManager fragmentManager=getSupportFragmentManager();
-                        FragmentTransaction
-                                fragmentTransaction=fragmentManager.beginTransaction();
-                        Dashboard f1=new Dashboard();
-                        fragmentTransaction.add(R.id.dashboard,f1);
-                        fragmentTransaction.commit();*/
+                        fun_dashboard();
 
                         mDrawerLayout.closeDrawers();
-
+                        mDrawerLayout = findViewById(R.id.chdrawer);
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
 
@@ -43,5 +37,15 @@ public class reg_as_chef extends AppCompatActivity {
                     }
                 });
     }
+    public void fun_dashboard()
+    {
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction  fragmentTransaction=fragmentManager.beginTransaction();
+        BlankFragment f1=new BlankFragment();
+        fragmentTransaction.add(R.id.fragment_container,f1);
+        fragmentTransaction.commit();
+
+    }
 
 }
+
