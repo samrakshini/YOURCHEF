@@ -26,7 +26,7 @@ public class Register_here extends AppCompatActivity {
     }
     public void client_reg(View view)
     {
-        final Intent cl = new Intent(this,reg_as_client.class);
+        final Intent cl = new Intent(this,Client_pane.class);
         startActivity(cl);
     }
 }

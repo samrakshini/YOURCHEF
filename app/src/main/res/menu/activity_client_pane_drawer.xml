@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/db" android:title="Dashboard" android:icon="@drawable/ic_dashboard_black_24dp"/>
+        <item android:id="@+id/fc" android:title="Find Chef" android:icon="@drawable/ic_find_in_page_black_24dp"/>
+        <item android:id="@+id/mh" android:title="My Hires" android:icon="@drawable/ic_recent_actors_black_24dp"/>
+        <item android:id="@+id/rc" android:title="Rate Chefs" android:icon="@drawable/ic_rate_review_black_24dp"/>
+        <item android:id="@+id/lg" android:title="Logout" android:icon="@drawable/ic_exit_to_app_black_24dp"/>
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+
+        </menu>
+    </item>
+
+</menu>

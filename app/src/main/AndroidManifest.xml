@@ -22,6 +22,10 @@
         <activity
             android:name=".Chef_pane"
             android:label="@string/title_activity_chef_pane"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Client_pane"
+            android:label="@string/title_activity_client_pane"
             android:theme="@style/AppTheme"></activity>
     </application>
 
