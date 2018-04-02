@@ -20,7 +20,7 @@ public class Register_here extends AppCompatActivity {
     }
     public void chef_reg(View view)
     {
-        final Intent ch = new Intent(this,reg_as_chef.class);
+        final Intent ch = new Intent(this,Chef_pane.class);
         startActivity(ch);
 
     }
