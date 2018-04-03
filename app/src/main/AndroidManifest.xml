@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".login_screen" />
         <activity android:name=".Register_here" />
-        <activity android:name=".reg_as_client" />
         <activity
             android:name=".Chef_pane"
             android:label="@string/title_activity_chef_pane"

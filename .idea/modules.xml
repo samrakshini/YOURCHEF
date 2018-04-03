@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YOURCHEF.iml" filepath="$PROJECT_DIR$/YOURCHEF.iml" />
-      <module fileurl="file://C:\MADproject_Wgithub\YOURCHEF\YOURCHEF.iml" filepath="C:\MADproject_Wgithub\YOURCHEF\YOURCHEF.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\MADproject_Wgithub\YOURCHEF\app\app.iml" filepath="C:\MADproject_Wgithub\YOURCHEF\app\app.iml" />
     </modules>
   </component>
 </project>
