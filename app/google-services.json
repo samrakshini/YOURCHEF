@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "166869408013",
+    "firebase_url": "https://yourchef-a775e.firebaseio.com",
+    "project_id": "yourchef-a775e",
+    "storage_bucket": "yourchef-a775e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166869408013:android:bc4b68b7b4752d62",
+        "android_client_info": {
+          "package_name": "com.example.android.yourchef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166869408013-7sg972d2kldrrai5hdnij1a5od121eqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.yourchef",
+            "certificate_hash": "07673a8ca0347186dedf94664ea69ed454c99f2a"
+          }
+        },
+        {
+          "client_id": "166869408013-jvg8tr5h8li9225a1hc141gorjcbucil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5QA3ZIJvnenNF5TfBZNorhmruPixHU-w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166869408013-jvg8tr5h8li9225a1hc141gorjcbucil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
