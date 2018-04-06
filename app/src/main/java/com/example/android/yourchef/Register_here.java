@@ -67,7 +67,7 @@ public class Register_here extends AppCompatActivity {
                     }
                 });
         User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-        databaseReference.child().setValue(user_chef);
+        databaseReference.child("").setValue(user_chef);
 
         Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
         final Intent ch = new Intent(this,Chef_pane.class);
