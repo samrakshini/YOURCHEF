@@ -24,22 +24,30 @@ public class login_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-    register_here=(TextView)findViewById(R.id.reg_here);
-    username=(EditText)findViewById(R.id.username);
-    password=(EditText)findViewById(R.id.password);
-    mAuth = FirebaseAuth.getInstance();
+        register_here=(TextView)findViewById(R.id.reg_here);
+        username=(EditText)findViewById(R.id.email);
+        password=(EditText)findViewById(R.id.password);
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
+
+
     public void open_register_here(View view)
     {
-        startSignIn();
+
         final Intent s = new Intent(this,Register_here.class);
         startActivity(s);
     }
 
+    public void login(View view)
+    {
+        startSignIn();
+    }
+
     public  void startSignIn()
     {
+
         String username_name=username.getText().toString();
         String password_password=password.getText().toString();
         mAuth.signInWithEmailAndPassword(username_name,password_password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -70,5 +78,6 @@ public class login_screen extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
+        Toast.makeText(login_screen.this,"Already logged in",Toast.LENGTH_LONG);
     }
 }

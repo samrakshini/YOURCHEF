@@ -63,7 +63,8 @@
                 android:text="LOGIN"
                 android:textColor="@color/Dgreen"
                 android:textSize="25sp"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:onClick="login"/>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

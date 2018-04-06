@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".splash_launch">
+
+        </activity>
+        <activity android:name=".login_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".login_screen" />
         <activity android:name=".Register_here" />
         <activity
             android:name=".Chef_pane"

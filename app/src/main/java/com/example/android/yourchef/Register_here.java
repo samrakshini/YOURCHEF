@@ -40,13 +40,15 @@ public class Register_here extends AppCompatActivity {
    email=(EditText)findViewById(R.id.email_id1);
    firebaseDatabase=FirebaseDatabase.getInstance();
    databaseReference=firebaseDatabase.getReference("Users");
-    mAuth=FirebaseAuth.getInstance();
+
 
     }
     public void chef_reg(View view)
     {
-
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+        String email_entered=email.getText().toString().trim();
+        String password_entered=password.getText().toString().trim();
+        mAuth=FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(email_entered, password_entered)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -54,6 +56,12 @@ public class Register_here extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
+                            databaseReference.child(user_chef.username).setValue(user_chef);
+
+                            Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
+                            final Intent ch = new Intent(Register_here.this,Chef_pane.class);
+                            startActivity(ch);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -66,13 +74,6 @@ public class Register_here extends AppCompatActivity {
                         // ...
                     }
                 });
-        User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-        databaseReference.child("..").setValue(user_chef);
-
-        Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
-        final Intent ch = new Intent(this,Chef_pane.class);
-        startActivity(ch);
-
     }
     public void client_reg(View view)
     {
@@ -82,4 +83,6 @@ public class Register_here extends AppCompatActivity {
         final Intent cl = new Intent(this,Client_pane.class);
         startActivity(cl);
     }
+
+
 }
