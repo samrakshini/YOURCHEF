@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,21 +29,26 @@ public class Register_here extends AppCompatActivity {
    mobile_no=(EditText)findViewById(R.id.mob_no);
    password=(EditText)findViewById(R.id.password);
    full_name=(EditText)findViewById(R.id.full_name);
-   email=(EditText)findViewById(R.id.email_id);
+   email=(EditText)findViewById(R.id.email_id1);
    firebaseDatabase=FirebaseDatabase.getInstance();
-   databaseReference=firebaseDatabase.getReference();
+   databaseReference=firebaseDatabase.getReference("Users");
 
 
     }
     public void chef_reg(View view)
     {
         User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
+        databaseReference.child(user_chef.username).setValue(user_chef);
+        Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
         final Intent ch = new Intent(this,Chef_pane.class);
         startActivity(ch);
 
     }
     public void client_reg(View view)
     {
+        User_client user_client=new User_client(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
+        databaseReference.child(user_client.username).setValue(user_client);
+        Toast.makeText(Register_here.this,"Registered successfully as client",Toast.LENGTH_SHORT);
         final Intent cl = new Intent(this,Client_pane.class);
         startActivity(cl);
     }
