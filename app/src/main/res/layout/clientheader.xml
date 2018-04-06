@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:orientation="vertical"
-    android:background="@drawable/client_bg"
+    android:background="@color/fyellow"
     android:padding="20dp">
     <ImageView
         android:layout_width="75dp"
@@ -14,13 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Client Name"
-        android:textColor="@color/SnowWhite"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="5dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="abc@gmail.com"
-        android:textColor="@color/SnowWhite"/>
+        android:textColor="@color/black"/>
 
 </LinearLayout>
