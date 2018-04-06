@@ -4,4 +4,6 @@
     <color name="Dgreen">#006400</color>
     <color name="colorAccent">#FF4081</color>
     <color name="SnowWhite">#FFFAFA</color>
+    <color name="black">#000000</color>
+
 </resources>
