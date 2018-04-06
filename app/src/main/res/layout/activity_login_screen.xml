@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.yourchef.login_screen"
-    android:background="@drawable/loginscrn">
+    android:background="@color/fgreen">
 
 
     <EditText
