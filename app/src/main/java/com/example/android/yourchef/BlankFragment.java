@@ -7,6 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -17,7 +24,7 @@ import android.view.ViewGroup;
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment extends Fragment {
+public class BlankFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,10 +34,17 @@ public class BlankFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public CheckBox indian,thai,chinese,mexican,french;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseUser firebaseUser;
+    UserInfo user;
+
     private OnFragmentInteractionListener mListener;
 
     public BlankFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -57,7 +71,9 @@ public class BlankFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            set_values();
         }
+
     }
 
     @Override
@@ -86,6 +102,29 @@ public class BlankFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        String uid;
+        uid=user.getUid();
+
+        switch (view.getId())
+        {
+            case R.id.indian_chkbox:
+            Cuisine ind;
+            if(indian.isChecked()){
+                ind=new Cuisine(true);
+            }
+            else {
+                ind=new Cuisine(false);
+            }
+                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("indian");
+            databaseReference.setValue(ind);
+
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -100,4 +139,20 @@ public class BlankFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void set_values()
+    {
+
+        indian=getActivity().findViewById(R.id.indian_chkbox);
+        french=getActivity().findViewById(R.id.french_chkbox);
+        thai=getActivity().findViewById(R.id.thai_chkbox);
+        mexican=getActivity().findViewById(R.id.mexican_chkbox);
+        chinese=getActivity().findViewById(R.id.chinese_chkbox);
+        indian.setOnClickListener(this);
+        french.setOnClickListener(this);
+        thai.setOnClickListener(this);
+        mexican.setOnClickListener(this);
+        chinese.setOnClickListener(this);
+    }
+
 }

@@ -57,7 +57,7 @@ public class Register_here extends AppCompatActivity {
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-                            databaseReference.child(user_chef.email).setValue(user_chef);
+                            databaseReference.child(mAuth.getCurrentUser().getUid()).setValue(user_chef);
 
                             Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
                             final Intent ch = new Intent(Register_here.this,Chef_pane.class);
@@ -89,7 +89,7 @@ public class Register_here extends AppCompatActivity {
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             User_client user_client=new User_client(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-                            databaseReference.child(user_client.email).setValue(user_client);
+                            databaseReference.child(mAuth.getCurrentUser().getUid()).setValue(user_client);
                             Toast.makeText(Register_here.this,"Registered successfully as client",Toast.LENGTH_SHORT);
                             final Intent cl = new Intent(Register_here.this,Client_pane.class);
                             startActivity(cl);

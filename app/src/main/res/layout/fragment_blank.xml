@@ -134,7 +134,8 @@
                 android:layout_row="6"
                 android:text="indian"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                />
 
 
             <CheckBox
@@ -143,7 +144,8 @@
                 android:layout_row="7"
                 android:text="Thai"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                />
 
 
             <CheckBox
@@ -152,7 +154,8 @@
                 android:layout_row="8"
                 android:text="Chinese"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                />
 
             <CheckBox
                 android:id="@+id/french_chkbox"
@@ -160,7 +163,8 @@
                 android:layout_row="9"
                 android:text="French"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                />
 
             <CheckBox
                 android:id="@+id/mexican_chkbox"
@@ -168,7 +172,8 @@
                 android:layout_row="10"
                 android:text="Mexican"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                />
 
 
         </GridLayout>

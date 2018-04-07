@@ -15,5 +15,10 @@ public class User_chef {
         this.full_name=full_name;
         this.email=email;
         this.type="chef";
+        this.chinese=false;
+        this.indian=false;
+        this.french=false;
+        this.mexican=false;
+        this.thai=false;
     }
 }
