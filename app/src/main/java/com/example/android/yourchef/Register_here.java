@@ -57,7 +57,7 @@ public class Register_here extends AppCompatActivity {
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             User_chef user_chef=new User_chef(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-                            databaseReference.child(user_chef.username).setValue(user_chef);
+                            databaseReference.child(user_chef.email).setValue(user_chef);
 
                             Toast.makeText(Register_here.this,"Registered successfully as chef",Toast.LENGTH_SHORT);
                             final Intent ch = new Intent(Register_here.this,Chef_pane.class);
@@ -77,11 +77,36 @@ public class Register_here extends AppCompatActivity {
     }
     public void client_reg(View view)
     {
-        User_client user_client=new User_client(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
-        databaseReference.child(user_client.username).setValue(user_client);
-        Toast.makeText(Register_here.this,"Registered successfully as client",Toast.LENGTH_SHORT);
-        final Intent cl = new Intent(this,Client_pane.class);
-        startActivity(cl);
+        String email_entered=email.getText().toString().trim();
+        String password_entered=password.getText().toString().trim();
+        mAuth=FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(email_entered, password_entered)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            User_client user_client=new User_client(username.getText().toString(),mobile_no.getText().toString(),password.getText().toString(),full_name.getText().toString(),email.getText().toString());
+                            databaseReference.child(user_client.email).setValue(user_client);
+                            Toast.makeText(Register_here.this,"Registered successfully as client",Toast.LENGTH_SHORT);
+                            final Intent cl = new Intent(Register_here.this,Client_pane.class);
+                            startActivity(cl);
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(Register_here.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+
+
     }
 
 
