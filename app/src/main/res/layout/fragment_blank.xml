@@ -130,9 +130,11 @@
 
             <CheckBox
                 android:id="@+id/indian_chkbox"
+                android:buttonTint="@color/black"
                 android:layout_column="0"
                 android:layout_row="6"
                 android:text="indian"
+                android:textColorHighlight="@color/black"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 />
@@ -140,6 +142,7 @@
 
             <CheckBox
                 android:id="@+id/thai_chkbox"
+                android:buttonTint="@color/black"
                 android:layout_column="0"
                 android:layout_row="7"
                 android:text="Thai"
@@ -150,6 +153,7 @@
 
             <CheckBox
                 android:id="@+id/chinese_chkbox"
+                android:buttonTint="@color/black"
                 android:layout_column="0"
                 android:layout_row="8"
                 android:text="Chinese"
@@ -159,6 +163,7 @@
 
             <CheckBox
                 android:id="@+id/french_chkbox"
+                android:buttonTint="@color/black"
                 android:layout_column="0"
                 android:layout_row="9"
                 android:text="French"
@@ -168,6 +173,7 @@
 
             <CheckBox
                 android:id="@+id/mexican_chkbox"
+                android:buttonTint="@color/black"
                 android:layout_column="0"
                 android:layout_row="10"
                 android:text="Mexican"
