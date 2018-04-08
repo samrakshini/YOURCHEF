@@ -18,6 +18,7 @@
             android:layout_width="298dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/yc1logo" />
 
 

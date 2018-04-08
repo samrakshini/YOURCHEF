@@ -6,6 +6,8 @@ package com.example.android.yourchef;
 
 public class User_chef {
     String username,mob_no,password,full_name,email,type;
+    Boolean indian,chinese,french,mexican,thai;
+
     public User_chef(String username,String mob_no,String password,String full_name,String email) {
         this.username=username;
         this.mob_no=mob_no;
@@ -13,5 +15,10 @@ public class User_chef {
         this.full_name=full_name;
         this.email=email;
         this.type="chef";
+        this.chinese=false;
+        this.indian=false;
+        this.french=false;
+        this.mexican=false;
+        this.thai=false;
     }
 }
