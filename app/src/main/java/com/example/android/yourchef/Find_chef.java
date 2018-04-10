@@ -1,12 +1,28 @@
 package com.example.android.yourchef;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,15 +33,22 @@ import android.view.ViewGroup;
  * Use the {@link Find_chef#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Find_chef extends Fragment {
+public class Find_chef extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    ListView listView;
+    ArrayList<String> al;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View myView;
+    ArrayAdapter<String> ad;
+    TextView t_indian;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +87,11 @@ public class Find_chef extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_chef, container, false);
+        myView = inflater.inflate(R.layout.fragment_find_chef, container, false);
+        t_indian=(TextView)myView.findViewById(R.id.find_indian);
+        t_indian.setOnClickListener(this);
+        listView=(ListView)myView.findViewById(R.id.indian_list);
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -85,6 +112,37 @@ public class Find_chef extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onClick(View view) {
+        //Toast.makeText(getActivity(),"Reached on click",Toast.LENGTH_LONG).show();
+        al=new ArrayList<String>();
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference("Users");
+        if(view==t_indian) {
+            Query query = databaseReference.orderByChild("indian").equalTo(true);
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    al.clear();
+                    for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
+                        User_chef value = zoneSnapshot.getValue(User_chef.class);
+                        //Log.d("check",value.getFull_name());
+                        al.add(value.getFull_name());
+                    }
+                    ad = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, al);
+                    listView.setAdapter(ad);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

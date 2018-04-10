@@ -89,32 +89,13 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         thai=myView.findViewById(R.id.thai_chkbox);
         mexican=myView.findViewById(R.id.mexican_chkbox);
         chinese=myView.findViewById(R.id.chinese_chkbox);
-        //.setOnCheckedChangeListener(BlankFragment.this);
-      /*  indian.setOnClickListener(new View.OnClickListener() {
 
-          @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(),"Reached on click",Toast.LENGTH_LONG).show();
-                firebaseDatabase=FirebaseDatabase.getInstance();
-                user=FirebaseAuth.getInstance().getCurrentUser();
-                String uid;
-                uid=user.getUid();
-                Cuisine ind;
-                if(indian.isChecked()){
-                    ind=new Cuisine(true);
-                }
-                else {
-                    ind=new Cuisine(false);
-                }
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("indian");
-                databaseReference.setValue(ind);
-            }
-        });*/
         indian.setOnClickListener(this);
         french.setOnClickListener(this);
         thai.setOnClickListener(this);
         mexican.setOnClickListener(this);
         chinese.setOnClickListener(this);
+
         return myView;
 
     }
