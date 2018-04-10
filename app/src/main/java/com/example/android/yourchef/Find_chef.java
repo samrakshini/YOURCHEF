@@ -48,7 +48,7 @@ public class Find_chef extends Fragment implements View.OnClickListener{
     private String mParam2;
     View myView;
     ArrayAdapter<String> ad;
-    TextView t_indian;
+    TextView t_indian,t_thai,t_mexican,t_french,t_chinese;
 
     private OnFragmentInteractionListener mListener;
 
@@ -89,7 +89,15 @@ public class Find_chef extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_find_chef, container, false);
         t_indian=(TextView)myView.findViewById(R.id.find_indian);
+        t_chinese=(TextView)myView.findViewById(R.id.find_chinese);
+        t_thai=(TextView)myView.findViewById(R.id.find_thai);
+        t_mexican=(TextView)myView.findViewById(R.id.find_mexican);
+        t_french=(TextView)myView.findViewById(R.id.find_french);
         t_indian.setOnClickListener(this);
+        t_french.setOnClickListener(this);
+        t_mexican.setOnClickListener(this);
+        t_chinese.setOnClickListener(this);
+        t_thai.setOnClickListener(this);
         listView=(ListView)myView.findViewById(R.id.indian_list);
         return myView;
     }
@@ -141,6 +149,95 @@ public class Find_chef extends Fragment implements View.OnClickListener{
                 }
             });
         }
+        if(view==t_mexican) {
+            Query query = databaseReference.orderByChild("mexican").equalTo(true);
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    al.clear();
+                    for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
+                        User_chef value = zoneSnapshot.getValue(User_chef.class);
+                        //Log.d("check",value.getFull_name());
+                        al.add(value.getFull_name());
+                    }
+                    ad = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, al);
+                    listView.setAdapter(ad);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        if(view==t_chinese) {
+            Query query = databaseReference.orderByChild("chinese").equalTo(true);
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    al.clear();
+                    for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
+                        User_chef value = zoneSnapshot.getValue(User_chef.class);
+                        //Log.d("check",value.getFull_name());
+                        al.add(value.getFull_name());
+                    }
+                    ad = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, al);
+                    listView.setAdapter(ad);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        if(view==t_thai) {
+            Query query = databaseReference.orderByChild("thai").equalTo(true);
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    al.clear();
+                    for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
+                        User_chef value = zoneSnapshot.getValue(User_chef.class);
+                        //Log.d("check",value.getFull_name());
+                        al.add(value.getFull_name());
+                    }
+                    ad = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, al);
+                    listView.setAdapter(ad);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        if(view==t_french) {
+            Query query = databaseReference.orderByChild("french").equalTo(true);
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    al.clear();
+                    for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
+                        User_chef value = zoneSnapshot.getValue(User_chef.class);
+                        //Log.d("check",value.getFull_name());
+                        al.add(value.getFull_name());
+                    }
+                    ad = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, al);
+                    listView.setAdapter(ad);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
 
 
