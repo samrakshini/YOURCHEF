@@ -41,4 +41,24 @@ public class User_chef {
     {
         return this.email;
     }
+    public Boolean getIndian()
+    {
+        return this.indian;
+    }
+    public Boolean getChinese()
+    {
+        return this.chinese;
+    }
+    public Boolean getFrench()
+    {
+        return this.french;
+    }
+    public Boolean getMexican()
+    {
+        return this.mexican;
+    }
+    public Boolean getThai()
+    {
+        return this.thai;
+    }
 }

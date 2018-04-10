@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -40,8 +44,10 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
     DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
     UserInfo user;
-
+    TextView name_value,email_value,phone_value;
     private OnFragmentInteractionListener mListener;
+    String uid;
+    User_chef details;
 
     public BlankFragment() {
         // Required empty public constructor
@@ -89,6 +95,47 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         thai=myView.findViewById(R.id.thai_chkbox);
         mexican=myView.findViewById(R.id.mexican_chkbox);
         chinese=myView.findViewById(R.id.chinese_chkbox);
+        name_value=(TextView)myView.findViewById(R.id.name_value);
+        email_value=(TextView)myView.findViewById(R.id.email_value);
+        phone_value=(TextView)myView.findViewById(R.id.phone_value);
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        uid=user.getUid();
+        databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(uid);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                details=dataSnapshot.getValue(User_chef.class);
+                name_value.setText(details.getFull_name());
+                email_value.setText(details.getEmail());
+                phone_value.setText(details.getMob_no());
+                if(details.getChinese())
+                {
+                    chinese.setChecked(true);
+                }
+                if(details.getFrench())
+                {
+                    french.setChecked(true);
+                }
+                if(details.getIndian())
+                {
+                    indian.setChecked(true);
+                }
+                if(details.getMexican())
+                {
+                    mexican.setChecked(true);
+                }
+                if(details.getThai())
+                {
+                    thai.setChecked(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         indian.setOnClickListener(this);
         french.setOnClickListener(this);
@@ -126,7 +173,6 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         Toast.makeText(getActivity(),"Reached on click",Toast.LENGTH_LONG).show();
         firebaseDatabase=FirebaseDatabase.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
-        String uid;
         uid=user.getUid();
 
         switch (view.getId())
