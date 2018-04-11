@@ -25,6 +25,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_client_pane"
         app:menu="@menu/activity_client_pane_drawer"
-        android:background="#ffffff"/>
+       />
 
 </android.support.v4.widget.DrawerLayout>

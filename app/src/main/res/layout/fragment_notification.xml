@@ -2,12 +2,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.yourchef.Notification">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.android.yourchef.Notification"
+    android:background="#ffffff">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.CardView
+
+        android:id="@+id/nots"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/SnowWhite"
+        tools:cardUseCompatPadding="true"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+        <TextView
+            android:id="@+id/notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="monospace"
+            android:text="Notfication"
+            android:textColor="@color/Dgreen"
+            android:textSize="25sp"
+            android:visibility="visible"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="monospace"
+            android:text="user-surhi@ymail.com requested"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:visibility="visible"
+            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="for Indian cuisine"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="Accept"
+                android:background="@color/fgreen"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="Delete"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:background="@color/fgreen"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </FrameLayout>

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.android.yourchef"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -35,5 +35,8 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.2.0'
     compile 'com.google.firebase:firebase-database:9.2.0'
     compile 'com.google.android.gms:play-services-auth:9.2.0'
+    compile 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

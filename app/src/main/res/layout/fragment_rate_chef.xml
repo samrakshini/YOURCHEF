@@ -2,12 +2,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.yourchef.Rate_chef">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.android.yourchef.Rate_chef"
+    android:background="#ffffff">
+    <android.support.v7.widget.CardView
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+        android:id="@+id/addr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/fyellow"
+        tools:cardUseCompatPadding="true"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/rc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="Rate Chef"
+                android:textColor="@color/Dgreen"
+                android:textSize="25sp"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/rcv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="Chef-abcd"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/rcv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="monospace"
+                android:text="Rate your experience"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:visibility="visible"
+                android:layout_gravity="center"/>
 
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        app:mrb_fillBackgroundStars="@color/fgreen"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginRight="-3dp"
+        android:rating="4"
+        android:layout_gravity="center"
+        app:mrb_progressTint="@color/fgreen"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </FrameLayout>
