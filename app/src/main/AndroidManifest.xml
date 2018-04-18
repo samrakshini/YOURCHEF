@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.yourchef">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/launcher_icon"
@@ -16,10 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login_screen" >
-
-
-        </activity>
+        <activity android:name=".login_screen" />
         <activity android:name=".Register_here" />
         <activity
             android:name=".Chef_pane"
@@ -28,7 +27,12 @@
         <activity
             android:name=".Client_pane"
             android:label="@string/title_activity_client_pane"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".cheforderActivity" />
+        <activity android:name=".french_food" />
+        <activity android:name=".mexican" />
+        <activity android:name=".chinesefood" />
+        <activity android:name=".thaifood"></activity>
     </application>
 
 </manifest>

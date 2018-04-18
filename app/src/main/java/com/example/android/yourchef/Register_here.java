@@ -39,7 +39,7 @@ public class Register_here extends AppCompatActivity {
    full_name=(EditText)findViewById(R.id.full_name);
    email=(EditText)findViewById(R.id.email_id1);
    firebaseDatabase=FirebaseDatabase.getInstance();
-   databaseReference=firebaseDatabase.getReference("Users");
+
 
 
     }
@@ -48,6 +48,7 @@ public class Register_here extends AppCompatActivity {
         String email_entered=email.getText().toString().trim();
         String password_entered=password.getText().toString().trim();
         mAuth=FirebaseAuth.getInstance();
+        databaseReference=firebaseDatabase.getReference("Users").child("chef");
         mAuth.createUserWithEmailAndPassword(email_entered, password_entered)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -80,6 +81,7 @@ public class Register_here extends AppCompatActivity {
         String email_entered=email.getText().toString().trim();
         String password_entered=password.getText().toString().trim();
         mAuth=FirebaseAuth.getInstance();
+        databaseReference=firebaseDatabase.getReference("Users").child("client");
         mAuth.createUserWithEmailAndPassword(email_entered, password_entered)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

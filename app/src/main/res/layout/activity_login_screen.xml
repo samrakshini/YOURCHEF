@@ -25,14 +25,13 @@
         android:id="@+id/email"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/password"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="236dp"
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_name"
         android:ems="10"
-        android:gravity="center"
-        android:hint="Email"
+        android:hint=" Email"
         android:inputType="textPersonName"
         android:textSize="16dp" />
 
@@ -87,34 +86,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="54dp"
         android:onClick="open_register_here"
-        android:text="Register Here." />
+        android:text="Register Here!"
+        android:textSize="30sp"
+        android:textColor="@color/SnowWhite" />
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_below="@+id/reg_here"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-85dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/mail"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@drawable/mail" />
-
-
-        <ImageView
-            android:id="@+id/fb"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@drawable/facebook" />
-    </LinearLayout>
 
 </RelativeLayout>

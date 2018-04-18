@@ -4,9 +4,26 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.widget.Toolbar;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -17,17 +34,25 @@ import android.view.ViewGroup;
  * Use the {@link Notification#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Notification extends Fragment {
+public class Notification extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    UserInfo user;
+    ListView listView;
+    ArrayList<String> al;
+    ArrayList<String> key=new ArrayList<>();
+    String uid;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View myView;
+    ArrayAdapter<String> ad;
+    TextView t_indian,t_thai,t_mexican,t_french,t_chinese;
+    String food_type;
+    private Find_chef.OnFragmentInteractionListener mListener;
 
-    private OnFragmentInteractionListener mListener;
 
     public Notification() {
         // Required empty public constructor
@@ -63,8 +88,16 @@ public class Notification extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_notification, container, false);
+        //toolbar
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+
+
+        listView=(ListView)myView.findViewById(R.id.notification_list);
+
+
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,6 +117,49 @@ public class Notification extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        al=new ArrayList<String>();
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        uid=user.getUid();
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("orders");
+        ad = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.notification_listitem, al);
+
+        listView.setAdapter(ad);
+
+
+            databaseReference.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    String value=dataSnapshot.getValue(String.class);
+                    al.add(value);
+                    ad.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
     }
 
     /**

@@ -4,13 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -51,7 +55,6 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
 
     public BlankFragment() {
         // Required empty public constructor
-
     }
 
     /**
@@ -70,15 +73,17 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
 
         }
 
@@ -91,6 +96,8 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
 
         View myView = inflater.inflate(R.layout.fragment_blank, container, false);
         indian=myView.findViewById(R.id.indian_chkbox);
+
+
         french=myView.findViewById(R.id.french_chkbox);
         thai=myView.findViewById(R.id.thai_chkbox);
         mexican=myView.findViewById(R.id.mexican_chkbox);
@@ -100,7 +107,13 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         phone_value=(TextView)myView.findViewById(R.id.phone_value);
         user=FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
-        databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(uid);
+        //for toolbar
+
+
+
+
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("Users").child("chef").child(uid);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -135,6 +148,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
 
             }
         });
+
 
 
         indian.setOnClickListener(this);
@@ -178,7 +192,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
         switch (view.getId())
         {
             case R.id.indian_chkbox:
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("indian");
+                databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("indian");
                 if(indian.isChecked()){
                     databaseReference.setValue(true);
                 }
@@ -186,7 +200,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
                     databaseReference.setValue(false);
                 }
             case R.id.chinese_chkbox:
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("chinese");
+                databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("chinese");
                 if(chinese.isChecked()){
                     databaseReference.setValue(true);
                 }
@@ -194,7 +208,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
                     databaseReference.setValue(false);
                 }
             case R.id.thai_chkbox:
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("thai");
+                databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("thai");
                 if(thai.isChecked()){
                     databaseReference.setValue(true);
                 }
@@ -202,7 +216,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
                     databaseReference.setValue(false);
                 }
             case R.id.french_chkbox:
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("french");
+                databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("french");
                 if(french.isChecked()){
                     databaseReference.setValue(true);
                 }
@@ -210,7 +224,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
                     databaseReference.setValue(false);
                 }
             case R.id.mexican_chkbox:
-                databaseReference=firebaseDatabase.getReference("Users").child(uid).child("mexican");
+                databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("mexican");
                 if(mexican.isChecked()){
                     databaseReference.setValue(true);
                 }

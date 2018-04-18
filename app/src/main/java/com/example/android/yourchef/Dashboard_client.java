@@ -4,9 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -17,7 +29,7 @@ import android.view.ViewGroup;
  * Use the {@link Dashboard_client#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Dashboard_client extends Fragment {
+public class Dashboard_client extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +40,13 @@ public class Dashboard_client extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseUser firebaseUser;
+    UserInfo user;
+    TextView clname_value,clemail_value,clphone_value;
+    String uid;
+    User_client details;
 
     public Dashboard_client() {
         // Required empty public constructor
@@ -63,8 +82,32 @@ public class Dashboard_client extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View myView = inflater.inflate(R.layout.fragment_dashboard_client, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard_client, container, false);
+        clname_value=(TextView)myView.findViewById(R.id.cname_value);
+        clemail_value=(TextView)myView.findViewById(R.id.cemail_value);
+        clphone_value=(TextView)myView.findViewById(R.id.cphone_value);
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        uid=user.getUid();
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("Users").child("client").child(uid);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                details=dataSnapshot.getValue(User_client.class);
+                clname_value.setText(details.getFull_name());
+                clemail_value.setText(details.getEmail());
+                clphone_value.setText(details.getMob_no());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+       return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,6 +129,11 @@ public class Dashboard_client extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -100,4 +148,5 @@ public class Dashboard_client extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

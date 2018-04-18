@@ -4,10 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.support.v7.widget.Toolbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +65,9 @@ public class History_chef extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history_chef, container, false);
+        View myView = inflater.inflate(R.layout.fragment_history_chef, container, false);
+
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

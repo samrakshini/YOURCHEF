@@ -1,0 +1,12 @@
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/checkedTextView1"
+android:layout_width="match_parent"
+android:layout_height="40dp"
+android:text="food"
+
+android:textColor="@color/fgreen"
+android:textSize="20sp"
+android:gravity="center"
+android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+    />

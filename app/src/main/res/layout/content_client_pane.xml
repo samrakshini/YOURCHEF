@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.yourchef.Client_pane"
-    tools:showIn="@layout/app_bar_client_pane">
-
+    tools:showIn="@layout/app_bar_client_pane"
+    android:background="@color/SnowWhite">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:text="Hey There!"
+        android:textColor="@color/fgreen"
+        android:gravity="center_horizontal|center_vertical"/>
 </android.support.constraint.ConstraintLayout>
