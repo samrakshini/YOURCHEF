@@ -1,5 +1,7 @@
 package com.example.android.yourchef;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ public class french_food extends AppCompatActivity {
     Bundle extras;
     CheckBox foodlist;
     private DatabaseReference databaseReference;
+    private int mYear, mMonth, mDay, mHour, mMinute;
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
     String chef_id;
@@ -52,6 +55,36 @@ public class french_food extends AppCompatActivity {
 
         idate=(EditText)findViewById(R.id.cdate);
         food=new ArrayList<String>();
+
+        Button datebutton=(Button)findViewById(R.id.datebutton);
+        Button timebutton=(Button)findViewById(R.id.timebutton);
+
+        timebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog timepicker=new TimePickerDialog(french_food.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(android.widget.TimePicker timePicker, int i, int i1) {
+                        itime.setText(i+":"+i1);
+                    }
+                },mHour,mMinute, android.text.format.DateFormat.is24HourFormat(french_food.this));
+                timepicker.show();
+            }
+
+        });
+        datebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(cheforderActivity.this,"blabla",Toast.LENGTH_LONG).show();
+                DatePickerDialog pickdate=new DatePickerDialog(french_food.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker datePicker, int i, int i1, int i2) {
+                        idate.setText(i2+"/"+(i1+1)+"/"+i);
+                    }
+                },mYear,mMonth,mDay);
+                pickdate.show();
+            }
+        });
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference("Users").child("french_food");
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,R.layout.cheforderlistview,food);

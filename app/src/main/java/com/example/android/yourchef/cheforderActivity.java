@@ -1,16 +1,16 @@
 package com.example.android.yourchef;
 
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserInfo;
@@ -24,20 +24,22 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class cheforderActivity extends AppCompatActivity {
+public class cheforderActivity extends AppCompatActivity{
     String food_type;
     ListView listview;
-   String chefuid;
+   String chefuid,date1,time1;
     ArrayList<String> food;
-    Button sendButton;
+    Button sendButton,datebutton,timebutton;
     boolean itemSelected;
-    EditText itime,idate;
     UserInfo user;
     String uid;
     Bundle extras;
+    EditText idate,itime;
     CheckBox foodlist;
+    private int mYear, mMonth, mDay, mHour, mMinute;
     private DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
@@ -52,9 +54,11 @@ public class cheforderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheforder);
         listview = (ListView)findViewById(R.id.food_list);
+        datebutton=(Button)findViewById(R.id.datebutton);
+        timebutton=(Button)findViewById(R.id.timebutton);
         //string array
-        itime=(EditText)findViewById(R.id.time);
 
+        itime=(EditText)findViewById(R.id.time);
 
         idate=(EditText)findViewById(R.id.cdate);
         sendButton = (Button) findViewById(R.id.send_order);
@@ -63,7 +67,33 @@ public class cheforderActivity extends AppCompatActivity {
         extras = getIntent().getExtras();
         chef_id= extras.getString("chef_key");
         food=new ArrayList<String>();
-         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+      timebutton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               TimePickerDialog timepicker=new TimePickerDialog(cheforderActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                   @Override
+                   public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        itime.setText(i+":"+i1);
+                   }
+               },mHour,mMinute, android.text.format.DateFormat.is24HourFormat(cheforderActivity.this));
+               timepicker.show();
+           }
+
+       });
+        datebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(cheforderActivity.this,"blabla",Toast.LENGTH_LONG).show();
+                DatePickerDialog pickdate=new DatePickerDialog(cheforderActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        idate.setText(i2+"/"+(i1+1)+"/"+i);
+                    }
+                },mYear,mMonth,mDay);
+                pickdate.show();
+            }
+        });
+            FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference("Users").child("indian_food");
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,R.layout.cheforderlistview,food);
         listview.setAdapter(arrayAdapter);
@@ -108,6 +138,7 @@ public class cheforderActivity extends AppCompatActivity {
 
             }
         });
+
         firebaseDatabase=FirebaseDatabase.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
@@ -129,7 +160,7 @@ public class cheforderActivity extends AppCompatActivity {
 
     }
 
-    }
+}
 
 
 

@@ -8,14 +8,7 @@
     android:background="#ffffff"
     android:layout_marginTop="55dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_chef"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_edit_black_24dp"
-        android:backgroundTint="#ffee58"/>
+
 
     <ScrollView android:id="@+id/item_scrollview"
         android:layout_width="match_parent"

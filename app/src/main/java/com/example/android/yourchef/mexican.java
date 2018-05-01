@@ -1,5 +1,7 @@
 package com.example.android.yourchef;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,7 @@ public class mexican extends AppCompatActivity {
     Button sendButton;
     boolean itemSelected;
     EditText itime,idate;
+    private int mYear, mMonth, mDay, mHour, mMinute;
     UserInfo user;
     String uid;
     Bundle extras;
@@ -52,6 +55,36 @@ public class mexican extends AppCompatActivity {
         extras = getIntent().getExtras();
         chef_id= extras.getString("chef_key");
         food=new ArrayList<String>();
+
+        Button datebutton=(Button)findViewById(R.id.datebutton);
+        Button timebutton=(Button)findViewById(R.id.timebutton);
+
+        timebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog timepicker=new TimePickerDialog(mexican.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(android.widget.TimePicker timePicker, int i, int i1) {
+                        itime.setText(i+":"+i1);
+                    }
+                },mHour,mMinute, android.text.format.DateFormat.is24HourFormat(mexican.this));
+                timepicker.show();
+            }
+
+        });
+        datebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(cheforderActivity.this,"blabla",Toast.LENGTH_LONG).show();
+                DatePickerDialog pickdate=new DatePickerDialog(mexican.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker datePicker, int i, int i1, int i2) {
+                        idate.setText(i2+"/"+(i1+1)+"/"+i);
+                    }
+                },mYear,mMonth,mDay);
+                pickdate.show();
+            }
+        });
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference("Users").child("mexican_food");
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,R.layout.cheforderlistview,food);

@@ -31,15 +31,24 @@
                 android:text="Date "
                 android:textColor="@color/SnowWhite"
                 android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/cdate"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:ems="10"
-                android:background="#11000000"
-                android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                tools:hint="     dd/mm/yy" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                        <EditText
+                            android:id="@+id/cdate"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:ems="10"
+                            android:background="#11000000"
+                            tools:hint="     dd/mm/yy" />
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                            android:id="@+id/datebutton"
+                            />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,16 +57,25 @@
                 android:text="Time"
                 android:textColor="@color/SnowWhite"
                 android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:id="@+id/time"
+                            android:ems="10"
+                            android:layout_height="40dp"
+                            android:background="#11000000"
 
-            <EditText
-                android:layout_width="match_parent"
-                android:id="@+id/time"
-                android:ems="10"
-                android:layout_height="40dp"
-                android:background="#11000000"
-                android:drawableLeft="@drawable/ic_access_time_black_24dp"
-                tools:hint="   hh/mm/ss" />
-
+                            tools:hint="   hh/mm/ss" />
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/timebutton"
+                            android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                            />
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

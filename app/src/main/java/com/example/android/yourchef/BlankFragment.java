@@ -184,7 +184,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener{
 
 
     public void onClick(View view) {
-        Toast.makeText(getActivity(),"Reached on click",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(),"Reached on click",Toast.LENGTH_LONG).show();
         firebaseDatabase=FirebaseDatabase.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
