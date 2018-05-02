@@ -114,6 +114,12 @@ public class Client_pane extends AppCompatActivity
             Intent i=new Intent(this,login_screen.class);
             startActivity(i);
         }
+        else if(id==R.id.dev)
+        {
+            Intent i=new Intent(this,developer.class);
+            startActivity(i);
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

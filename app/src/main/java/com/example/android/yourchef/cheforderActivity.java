@@ -2,7 +2,13 @@ package com.example.android.yourchef;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -26,6 +32,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import android.app.Notification;
+        import android.app.NotificationManager;
+        import android.app.PendingIntent;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.view.View;
 
 public class cheforderActivity extends AppCompatActivity{
     String food_type;
@@ -44,6 +57,7 @@ public class cheforderActivity extends AppCompatActivity{
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
    String chef_id;
+String name;
     public cheforderActivity()
     {
         //return this;
@@ -67,6 +81,7 @@ public class cheforderActivity extends AppCompatActivity{
         extras = getIntent().getExtras();
         chef_id= extras.getString("chef_key");
         food=new ArrayList<String>();
+
       timebutton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -142,6 +157,7 @@ public class cheforderActivity extends AppCompatActivity{
         firebaseDatabase=FirebaseDatabase.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
+        final DatabaseReference cldata =  firebaseDatabase.getReference("Users").child("client").child(uid);
         final DatabaseReference finalDatabaseReference =  firebaseDatabase.getReference("Users").child("chef").child(chef_id).child("orders");
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,10 +165,34 @@ public class cheforderActivity extends AppCompatActivity{
                 String date=idate.getText().toString().trim();
                 String time=itime.getText().toString().trim();
                 mAuth= FirebaseAuth.getInstance();
-                orderlist user_chef=new orderlist(idate.getText().toString(),itime.getText().toString());
+                orderlist user_chef=new orderlist(idate.getText().toString(),itime.getText().toString(),uid);
                 finalDatabaseReference.push().setValue(user_chef);
                 Toast.makeText(cheforderActivity.this, "Request Sent to chef!",
                         Toast.LENGTH_SHORT).show();
+                // prepare intent which is triggered if the
+// notification is selected
+                cldata.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        User_client cl  = dataSnapshot.getValue(User_client.class);
+                        //Log.d("check",value.getFull_name());
+                        name =cl.getFull_name();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                Intent intent = new Intent(cheforderActivity.this, Dashboard_client.class);
+                PendingIntent pending = PendingIntent.getActivity(cheforderActivity.this, 0, intent, 0);
+                Notification noti = new Notification.Builder(cheforderActivity.this).setContentTitle("New Order from"+uid.toString()).setContentText(idate.getText().toString()).setSmallIcon(R.mipmap.ic_launcher).setContentIntent(pending).build();
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                noti.flags |= Notification.FLAG_AUTO_CANCEL;
+                manager.notify(0, noti);
+
 
 
             }

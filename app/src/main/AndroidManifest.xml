@@ -32,7 +32,8 @@
         <activity android:name=".french_food" />
         <activity android:name=".mexican" />
         <activity android:name=".chinesefood" />
-        <activity android:name=".thaifood"></activity>
+        <activity android:name=".thaifood" />
+        <activity android:name=".developer"></activity>
     </application>
 
 </manifest>

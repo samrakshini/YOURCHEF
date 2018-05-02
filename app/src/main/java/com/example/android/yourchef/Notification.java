@@ -5,14 +5,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.ChildEventListener;
@@ -39,20 +44,18 @@ public class Notification extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    UserInfo user;
+
     ListView listView;
-    ArrayList<String> al;
-    ArrayList<String> key=new ArrayList<>();
-    String uid;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     View myView;
-    ArrayAdapter<String> ad;
-    TextView t_indian,t_thai,t_mexican,t_french,t_chinese;
-    String food_type;
+    UserInfo user;
+    String uid;
+    FirebaseListAdapter adapter;
     private Find_chef.OnFragmentInteractionListener mListener;
-
+Button accept,cancel;
 
     public Notification() {
         // Required empty public constructor
@@ -93,11 +96,41 @@ public class Notification extends Fragment implements View.OnClickListener {
 
         // Inflate the layout for this fragment
 
-
+        accept=(Button)myView.findViewById(R.id.accept);
+        cancel=(Button)myView.findViewById(R.id.cancel);
         listView=(ListView)myView.findViewById(R.id.notification_list);
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        uid=user.getUid();
+        Query query=FirebaseDatabase.getInstance().getReference("Users").child("chef").child(uid).child("orders");
+        FirebaseListOptions<orderlist> options=new FirebaseListOptions.Builder<orderlist>().setLayout(R.layout.notification_listitem).setQuery(query,orderlist.class).build();
+        adapter=new FirebaseListAdapter(options) {
+            @Override
+            protected void populateView(View v, Object model, int position) {
+               TextView date=v.findViewById(R.id.dateclient);
+               TextView time=v.findViewById(R.id.timeclient);
+               TextView client_id=v.findViewById(R.id.clientname);
 
+               orderlist order=(orderlist) model;
+               date.setText("Date:"+order.getdate().toString());
+               time.setText("Time:"+order.gettime().toString());
+               client_id.setText("ClientId:"+order.getclient_uid().toString());
 
+            }
+        };
+      listView.setAdapter(adapter);
         return myView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -121,46 +154,13 @@ public class Notification extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        al=new ArrayList<String>();
-        user= FirebaseAuth.getInstance().getCurrentUser();
-        uid=user.getUid();
-        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference("Users").child("chef").child(uid).child("orders");
-        ad = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.notification_listitem, al);
-
-        listView.setAdapter(ad);
 
 
-            databaseReference.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    String value=dataSnapshot.getValue(String.class);
-                    al.add(value);
-                    ad.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-            });
     }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this

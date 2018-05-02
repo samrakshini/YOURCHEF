@@ -103,15 +103,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INDIAN"
             android:id="@+id/find_indian"
-            android:textColor="@color/black"
+            android:textColor="@color/SnowWhite"
+            android:background="@color/fgreen"
             android:layout_marginLeft="20dp"
-            android:padding="5dp"
+            android:padding="0dp"
+            android:layout_marginRight="5dp"
             android:textSize="15sp"/>
 
         <TextView
@@ -119,8 +122,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MEXICAN"
-            android:padding="5dp"
+            android:padding="0dp"
             android:textSize="15sp"
+            android:layout_marginRight="5dp"
             android:textColor="@color/black"/>
 
         <TextView
@@ -128,8 +132,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CHINESE"
-            android:textColor="@color/black"
-            android:padding="5dp"
+            android:textColor="@color/SnowWhite"
+            android:background="@color/fgreen"
+            android:padding="0dp"
             android:textSize="15sp"/>
         <TextView
             android:id="@+id/find_thai"
@@ -137,20 +142,38 @@
             android:layout_height="wrap_content"
             android:text="THAI"
             android:textColor="@color/black"
-            android:padding="5dp"
+            android:padding="0dp"
+            android:layout_marginRight="5dp"
             android:textSize="15sp"/>
         <TextView
             android:id="@+id/find_french"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FRENCH"
-            android:textColor="@color/black"
-            android:padding="5dp"
+            android:textColor="@color/SnowWhite"
+            android:background="@color/fgreen"
+            android:padding="0dp"
+            android:layout_marginRight="5dp"
             android:textSize="15sp"/>
 
     </LinearLayout>
-    </android.support.v7.widget.CardView>
 
+
+    </android.support.v7.widget.CardView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:text="List of Chefs:"
+                android:textColor="@color/fgreen"
+                android:textSize="25sp"/>
+        </RelativeLayout>
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

@@ -1,7 +1,11 @@
 package com.example.android.yourchef;
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -40,6 +45,8 @@ public class thaifood extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
     String chef_id;
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +103,9 @@ public class thaifood extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String value=dataSnapshot.getValue(String.class);
                 food.add(value);
+                //fetch name of client
+
+
                 arrayAdapter.notifyDataSetChanged();
                listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
@@ -134,18 +144,40 @@ public class thaifood extends AppCompatActivity {
         firebaseDatabase=FirebaseDatabase.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
+
         final DatabaseReference finalDatabaseReference =  firebaseDatabase.getReference("Users").child("chef").child(chef_id).child("orders");
+        final DatabaseReference cldata =  firebaseDatabase.getReference("Users").child("client").child(uid);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String date=idate.getText().toString().trim();
                 String time=itime.getText().toString().trim();
                 mAuth= FirebaseAuth.getInstance();
-                orderlist user_chef=new orderlist(idate.getText().toString(),itime.getText().toString());
+                orderlist user_chef=new orderlist(idate.getText().toString(),itime.getText().toString(),uid);
                 finalDatabaseReference.push().setValue(user_chef);
                 Toast.makeText(thaifood.this, "Request Sent to chef!",
                         Toast.LENGTH_SHORT).show();
+               cldata.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            User_client cl  = dataSnapshot.getValue(User_client.class);
+                            //Log.d("check",value.getFull_name());
+                            name =cl.getFull_name();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                Intent intent = new Intent(thaifood.this, Dashboard_client.class);
+                PendingIntent pending = PendingIntent.getActivity(thaifood.this, 0, intent, 0);
+                android.app.Notification noti = new android.app.Notification.Builder(thaifood.this).setContentTitle("New Order from"+ name).setContentText(idate.getText().toString()).setSmallIcon(R.mipmap.ic_launcher).setContentIntent(pending).build();
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                noti.flags |= Notification.FLAG_AUTO_CANCEL;
+                manager.notify(0, noti);
 
             }
         });

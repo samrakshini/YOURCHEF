@@ -1,6 +1,7 @@
 package com.example.android.yourchef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 /**
@@ -20,6 +35,14 @@ import android.support.v7.widget.Toolbar;
  * create an instance of this fragment.
  */
 public class Rate_chef extends Fragment {
+    RatingBar ratingBar;
+    Button rate_btn;
+    TextView result;
+
+    String uid;
+    UserInfo user;
+    Bundle extras;
+    String chef_id;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +51,9 @@ public class Rate_chef extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
     private OnFragmentInteractionListener mListener;
 
     public Rate_chef() {
@@ -56,17 +81,54 @@ public class Rate_chef extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_rate_chef, container, false);
+        ratingBar=(RatingBar)myView.findViewById (R.id.rating);
+        rate_btn=(Button)myView.findViewById(R.id.rate_btn);
+        result=(TextView) myView.findViewById(R.id.result);
 
+
+
+
+        chef_id= extras.getString("chef_key");
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+            }
+        });
+        rate_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                result.setText("Result is:"+ratingBar);
+
+                firebaseDatabase=FirebaseDatabase.getInstance();
+                FirebaseAuth.getInstance().getCurrentUser();
+                user=FirebaseAuth.getInstance().getCurrentUser();
+                uid=user.getUid();
+                final DatabaseReference finalDatabaseReference =  firebaseDatabase.getReference("Users").child("chef")
+                        .child(chef_id).child("Rates ");
+                mAuth= FirebaseAuth.getInstance();
+
+                finalDatabaseReference.push().setValue(ratingBar);
+
+
+            }
+        });
         // Inflate the layout for this fragment
         return myView;
     }

@@ -289,6 +289,7 @@ public class Find_chef extends Fragment implements View.OnClickListener{
                     Intent myIntent = new Intent(view.getContext(), mexican.class);
                     myIntent.putExtra("chef_key", key.get(position));
                     startActivityForResult(myIntent, 0);
+
                 }
 
             }
